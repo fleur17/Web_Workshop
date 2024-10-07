@@ -3,12 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ESP32 WebSocket Demo</title>
+    HELLO WORLD !
 </head>
 <body>
-    hello world ! heyyy
-    
+    <h1>ESP32 WebSocket Communication</h1>
+    <button id="sendButton">Send to ESP32</button>
+    <p id="response">Waiting for response...</p>
+ 
+    <script>
+        // Connexion WebSocket à l'ESP32
+        const ws = new WebSocket('ws://IP: 10.1.224.102:81'); // Remplace YOUR_ESP32_IP par l'IP de ton ESP32
+
+        ws.onopen = () => {
+            console.log('Connected to ESP32 WebSocket');
+        };
+
+        ws.onmessage = (event) => {
+            document.getElementById('response').innerText = Message from ESP32: ${event.data};
+        };
+
+        document.getElementById('sendButton').addEventListener('click', () => {
+            ws.send('1'); // Envoyer un message "1" à l'ESP32
+        });
+    </script>
 </body>
 </html>
-    
-    
