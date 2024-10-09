@@ -3,29 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ESP32 WebSocket Demo</title>
-    HELLO WORLD !
+    <title>ESP32 LED Control</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .toggle-btn {
+            width: 100px;
+            height: 50px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+        .toggle-btn.off {
+            background-color: red;
+        }
+        .gauge {
+            width: 100px;
+            height: 300px;
+            border: 2px solid #333;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            margin: 20px auto;
+        }
+        .gauge-fill {
+            width: 100%;
+            background-color: #76c7c0;
+            position: absolute;
+            bottom: 0;
+            transition: height 0.2s;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        button.level-btn {
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button.level-btn:hover {
+            background-color: #555;
+        }
+    </style>
 </head>
 <body>
-    <h1>ESP32 WebSocket Communication</h1>
-    <button id="sendButton">Send to ESP32</button>
-    <p id="response">Waiting for response...</p>
- 
+    <h1>ESP32 LED Control</h1>
+    <button id="toggleBtn" class="toggle-btn">ON</button>
+    <p id="status">LED is OFF</p>
+
+    <div class="gauge">
+        <div class="gauge-fill" id="gauge-fill" style="height: 0%;"></div>
+    </div>
+    <div class="buttons">
+        <button class="level-btn" onclick="setBrightness(0)">0%</button>
+        <button class="level-btn" onclick="setBrightness(50)">50%</button>
+        <button class="level-btn" onclick="setBrightness(100)">100%</button>
+    </div>
+
     <script>
         // Connexion WebSocket à l'ESP32
-        const ws = new WebSocket('ws://IP: 10.1.224.102:81'); // Remplace YOUR_ESP32_IP par l'IP de ton ESP32
+        const ws = new WebSocket('ws://192.168.1.166:81');  // Remplacer YOUR_ESP32_IP par l'adresse IP de votre ESP32
 
+        // Etat du clignotement
+        let isBlinking = false;
+
+        // Quand la connexion WebSocket est ouverte
         ws.onopen = () => {
             console.log('Connected to ESP32 WebSocket');
         };
 
-        ws.onmessage = (event) => {
-            document.getElementById('response').innerText = Message from ESP32: ${event.data};
-        };
-
-        document.getElementById('sendButton').addEventListener('click', () => {
-            ws.send('1'); // Envoyer un message "1" à l'ESP32
+        // Fonction pour gérer le bouton toggle
+        document.getElementById('toggleBtn').addEventListener('click', () => {
+            if (isBlinking) {
+                ws.send('off');  // Envoyer la commande pour arrêter le clignotement
+                document.getElementById('toggleBtn').textContent = 'ON';
+                document.getElementById('toggleBtn').classList.remove('off');
+                document.getElementById('status').textContent = 'LED is OFF';
+            } else {
+                ws.send('on');  // Envoyer la commande pour démarrer le clignotement
+                document.getElementById('toggleBtn').textContent = 'OFF';
+                document.getElementById('toggleBtn').classList.add('off');
+                document.getElementById('status').textContent = 'LED is BLINKING';
+            }
+            isBlinking = !isBlinking;  // Inverser l'état du clignotement
         });
+
+        // Fonction pour régler la luminosité
+        function setBrightness(level) {
+            ws.send(level.toString());  // Envoyer le niveau de luminosité à l'ESP32
+            updateGauge(level); // Met à jour la jauge
+        }
+
+        // Met à jour la jauge d'intensité lumineuse
+        function updateGauge(level) {
+            const gaugeFill = document.getElementById('gauge-fill');
+            gaugeFill.style.height = level + '%'; // Met à jour la jauge visuellement
+        }
     </script>
 </body>
 </html>
