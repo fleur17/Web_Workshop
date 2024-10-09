@@ -1,0 +1,170 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Dancing Script , sans-serif;
+}
+
+body {
+    background-color: #f8f5f1;
+}
+
+/* Navigation Bar */
+header {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #d3d3d3;
+    padding: 20px 40px;
+}
+
+.logo img {
+    height: 50px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    text-decoration: none;
+    font-size: 18px;
+    color: #000;
+}
+
+/* Main About Me Section */
+.about-me {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #f7f3ec;
+    padding: 50px;
+    border-radius: 20px;
+    margin: 40px 80px;
+    position: relative;
+}
+
+.ab-left {
+    width: 25%;
+}
+/*centrer le about */
+
+.image-placeholder {
+    background-color: #e0dfdc;
+    border-radius: 50%;
+    width: 200px;
+    height: 250px;
+    margin-left: -10px;
+    
+    
+}
+
+.about-right {
+    width: 40%;
+    text-align: center;
+}
+
+.about-right h1 {
+    font-size: 50px;
+    font-family: Dancing Script, sans-serif;
+    margin-left: -10%;
+}
+
+
+.about-me{
+    font-size: 4%;
+    font-family: Dancing Script, sans-serif;
+    margin-left: -10%;
+    
+
+}
+
+.about-right p {
+    font-size: 20px;
+    color: #555;
+}
+
+.see1-more {
+    padding: 10px 10px;
+    /* remplissage intérieur entre contenu et les bordures*/
+    border: none;
+    background-color: #cfcfcf;
+    cursor:pointer;
+    border-radius: 5px;
+    margin-top: 30%;
+    margin-left: -50%;
+}
+
+.see-more {
+    padding: 10px 10px;
+    /* remplissage intérieur entre contenu et les bordures*/
+    border: none;
+    background-color: #cfcfcf;
+    cursor:pointer;
+    border-radius: 5px;
+    margin-top: 150%;
+    margin-left: 25%;
+}
+
+
+
+
+.about-flowers img {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 150px;
+}
+
+/* Content Sections */
+.content-sections {
+    display: flex;
+    justify-content: space-around;
+    margin: 40px 80px;
+}
+
+.section-box {
+    background-color: #f0e8e1;
+    padding: 20px;
+    width: 30%;
+    text-align: center;
+    border-radius: 10px;
+    position: relative;
+}
+
+.neuroaesthetics {
+    background-color: #efd3d1;
+}
+
+.design-graphic {
+    background-color: #dbdfe2;
+}
+
+.ui-web-design {
+    background-color: #e5c3c3;
+}
+
+.section-box h2 {
+    font-family: Dancing Script, sans-serif;
+    margin-top: 20px;
+    font-size: 24px;
+}
+
+.section-box p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.section-box .see-more {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
