@@ -25,5 +25,5 @@ Cette page web vous permet de contrôler la luminosité d'une LED connectée à 
    const ws = new WebSocket('ws://<ADRESSE_IP_ESP32>:81');
 
 
-![Figma](Images/Untitled.png)
+![Figma](https://www.figma.com/design/tFNzPnT6IbAepjawAU3EA1/Untitled?node-id=0-1&t=pZG4fGZQT8EhuTCI-1)
 
