@@ -26,7 +26,7 @@ Cette page web vous permet de contrôler la luminosité d'une LED connectée à 
 
 
 ![FIGMA](Images/Untitled.png)
-[![Vidéos](https://youtube.com/shorts/_ns90kN3uhI?si=kKHP-_lT6LdO7jMJ)
+[![Texte alternatif de l'image](https://img.youtube.com/vi/ID_VIDEO/0.jpg)](https://www.youtube.com/watch?v=ID_VIDEO)
 [![Vidéos](https://youtube.com/shorts/aDV1lDQf9Tw?si=-hLq9VQSi8pdX7zh)
 
 
