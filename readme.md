@@ -23,3 +23,7 @@ Cette page web vous permet de contrôler la luminosité d'une LED connectée à 
 1. Remplacez l'adresse IP dans l'URL de connexion WebSocket dans la balise `<script>` par l'adresse IP locale de votre ESP32.
    ```js
    const ws = new WebSocket('ws://<ADRESSE_IP_ESP32>:81');
+
+
+   ![Figma](Images/Untitled.png)
+
