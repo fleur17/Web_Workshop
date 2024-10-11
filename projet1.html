@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESP32 LED Control</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 50px;
+        }
+        .slider {
+            width: 80%;
+            margin: 20px auto;
+        }
+        .slider input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 12px;
+            background: linear-gradient(to right, #4CAF50, #d3d3d3);
+            outline: none;
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+        .slider input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            background: #4CAF50;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s, transform 0.3s;
+        }
+        .slider input[type="range"]::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            background: #4CAF50;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s, transform 0.3s;
+        }
+        .slider input[type="range"]:active::-webkit-slider-thumb {
+            transform: scale(1.2);
+            background: #3e8e41;
+        }
+        .slider input[type="range"]:active::-moz-range-thumb {
+            transform: scale(1.2);
+            background: #3e8e41;
+        }
+        p {
+            font-size: 18px;
+            color: #555;
+            margin-top: 10px;
+        }
+        #brightnessValue {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <h1>ESP32 LED Control</h1>
+
+    <!-- Jauge pour régler la luminosité -->
+    <div class="slider">
+        <input type="range" min="0" max="100" value="50" id="brightnessSlider">
+        <p>Luminosité: <span id="brightnessValue">50</span>%</p>
+    </div>
+
+    <script>
+        // Connexion WebSocket à l'ESP32
+        const ws = new WebSocket('ws://192.168.1.166:81');  // Remplacer par l'adresse IP de votre ESP32
+
+        // Quand la connexion WebSocket est ouverte
+        ws.onopen = () => {
+            console.log('Connected to ESP32 WebSocket');
+        };
+
+        // Sélectionner le slider et le texte d'affichage de la luminosité
+        const slider = document.getElementById('brightnessSlider');
+        const brightnessText = document.getElementById('brightnessValue');
+
+        // Quand la valeur du slider change, envoyer la nouvelle valeur au WebSocket
+        slider.oninput = function() {
+            let brightness = slider.value;
+            brightnessText.textContent = brightness;
+            ws.send(brightness.toString());  // Envoyer la luminosité à l'ESP32
+            console.log(`Brightness set to ${brightness}%`);
+        }
+    </script>
+</body>
+</html>
